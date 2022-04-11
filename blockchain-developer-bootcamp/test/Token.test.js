@@ -30,6 +30,10 @@ contract('Token', (accounts) => {
             const result = await token.decimals()
             result.should.equal(decimals)
         })
-  
+
+        it('tracks the total supply', async () => {
+            const result = await token.totalSupply()
+            result.should.equal(totalSupply)
+        })
     })
 })
