@@ -20,5 +20,9 @@ contract('Token', (accounts) => {
             result.should.equal(name)
         })
 
+        it('tracks the symbol', async () => {
+            const result = await token.symbol()
+            result.should.equal(symbol)  
+        })
     })
 })
