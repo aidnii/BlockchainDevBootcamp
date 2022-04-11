@@ -82,13 +82,18 @@ contract("Token", ([deployer, receiver]) => {
           .transfer(receiver, invalidAmount, { from: deployer })
           .should.be.rejectedWith(EVM_REVERT);
 
-          // attempt to transfer tokens when you don't have any
+        // attempt to transfer tokens when you don't have any
         invalidAmount = tokens(10); // 100 million - greater than total supply
         await token
-            .transfer(deployer, invalidAmount, { from: receiver })
-            .should.be.rejectedWith(EVM_REVERT);
+          .transfer(deployer, invalidAmount, { from: receiver })
+          .should.be.rejectedWith(EVM_REVERT);
+      });
+
+      it("rejects invalid receipients", async () => {
+        await token
+          .transfer(0x0, amount, { from: deployer })
+          .should.be.rejected;
       });
     });
   });
 });
-
