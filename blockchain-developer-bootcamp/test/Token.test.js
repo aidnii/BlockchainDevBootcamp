@@ -1,3 +1,4 @@
+import { expect } from 'chai'
 import { tokens } from './helpers'
 
 const Token = artifacts.require('./Token')
@@ -45,23 +46,29 @@ contract('Token', ([deployer, receiver]) => {
     })
 
     describe('sending tokens', () => {
+        let result
+        let amount
+
+        beforeEach(async () => {
+            amount = tokens(100)
+            result =  await token.transfer(receiver, amount, { from: deployer})
+        })
+        
         it('transfers token balances', async () => {
             let balanceOf
-            // balances before transfer
             balanceOf = await token.balanceOf(deployer)
-            console.log("deployer balance before transfer", balanceOf.toString())
+            balanceOf.toString().should.equal(tokens(999900).toString())
             balanceOf = await token.balanceOf(receiver)
-            console.log("receiver balance before transfer", balanceOf.toString())
-            
-            // Transfer
-            await token.transfer(receiver, tokens(100), { from: deployer})
+            balanceOf.toString().should.equal(tokens(100).toString())
+        })
 
-            // balances after transfer
-            balanceOf = await token.balanceOf(deployer)
-            console.log("deployer balance after transfer", balanceOf.toString())
-            balanceOf = await token.balanceOf(receiver)
-            console.log("receiver balance after transfer", balanceOf.toString())
-
+        it('emits a transfer event', async () => {
+            const log = result.logs[0]
+            log.event.should.eq('Transfer')
+            const event = log.args
+            event.from.toString().should.equal(deployer, 'from is correct')
+            event.to.should.equal(receiver, 'to is correct')
+            event.value.toString().should.equal(amount.toString(), 'amount is correct')
         })
     })
 })
