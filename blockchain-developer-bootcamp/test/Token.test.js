@@ -24,5 +24,12 @@ contract('Token', (accounts) => {
             const result = await token.symbol()
             result.should.equal(symbol)  
         })
+
+        
+        it('tracks the decimals', async () => {
+            const result = await token.decimals()
+            result.should.equal(decimals)
+        })
+  
     })
 })
