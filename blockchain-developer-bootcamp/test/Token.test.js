@@ -81,7 +81,14 @@ contract("Token", ([deployer, receiver]) => {
         await token
           .transfer(receiver, invalidAmount, { from: deployer })
           .should.be.rejectedWith(EVM_REVERT);
+
+          // attempt to transfer tokens when you don't have any
+        invalidAmount = tokens(10); // 100 million - greater than total supply
+        await token
+            .transfer(deployer, invalidAmount, { from: receiver })
+            .should.be.rejectedWith(EVM_REVERT);
       });
     });
   });
 });
+
