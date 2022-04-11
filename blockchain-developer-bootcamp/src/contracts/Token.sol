@@ -3,6 +3,7 @@ pragma solidity ^0.5.0;
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Token {
+    using SafeMath for uint;
     string public name = "Web3 Talent Agency";
     string public symbol = "WTA";
     uint256 public decimals = 18;
