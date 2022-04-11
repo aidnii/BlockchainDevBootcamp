@@ -3,10 +3,10 @@ const Token = artifacts.require('./Token')
 require('chai').use(require('chai-as-promised')).should()
 
 contract('Token', (accounts) => {
-    const name = 'my name'
-    const symbol = 'Symbol'
-    const decimals = 10
-    const totalSupply = 10
+    const name = 'Web3 Talent Agency'
+    const symbol = 'WTA'
+    const decimals = '18'
+    const totalSupply = '1000000000000000000000000'
     let token 
 
     beforeEach(async () => {
@@ -28,12 +28,12 @@ contract('Token', (accounts) => {
         
         it('tracks the decimals', async () => {
             const result = await token.decimals()
-            result.should.equal(decimals)
+            result.toString().should.equal(decimals)
         })
 
         it('tracks the total supply', async () => {
             const result = await token.totalSupply()
-            result.should.equal(totalSupply)
+            result.toString().should.equal(totalSupply)
         })
     })
 })
