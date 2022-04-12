@@ -99,19 +99,19 @@ contract("Token", ([deployer, receiver, exchange]) => {
   });
 
   describe("approving tokens", () => {
-      let result
-      let amount
+      let result;
+      let amount;
 
       beforeEach( async () => {
-          amount =  tokens(100)
-          result = await token.approve(exchange, amount, { from: deployer})
-      })
+          amount =  tokens(100);
+          result = await token.approve(exchange, amount, { from: deployer});
+      });
 
       describe('success', () => {
           it("allocates an allowance for delegated token spending on exchange", async () => {
              const allowance = await token.allowance(deployer, exchange)
              allowance.toString().should.equal(amount.toString()) 
-          })
+          });
     
           it("emits an Approval event", async () => {
             const log = result.logs[0];
@@ -123,10 +123,12 @@ contract("Token", ([deployer, receiver, exchange]) => {
               .toString()
               .should.equal(amount.toString(), "amount is correct");
           });
-      })
+      });
 
       describe('failure', () => {
-          
-    })
-  })
+          it("rejects invalid spenders", async () => {
+              await token.approve(0x0, amount, { from: deployer }).should.be.rejected;
+          });
+    });
+  });
 });
