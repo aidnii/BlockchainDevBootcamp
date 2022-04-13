@@ -131,4 +131,56 @@ contract("Token", ([deployer, receiver, exchange]) => {
           });
     });
   });
+
+  describe("delegating token transfers", () => {
+    let result;
+    let amount;
+
+    beforeEach(async () => {
+        amount = tokens(100);
+        await token.approve(exchange, amount, { from: deployer });  
+    })
+
+    describe("success", () => {
+        beforeEach(async () => {
+            result = await token.transferFrom(deployer, receiver, amount, { from: exchange });
+        });
+  
+  
+        // it("emits a Transfer event", async () => {
+        //       const log = result.logs[0];
+        //       log.event.should.eq("Transfer");
+        //       const event = log.args;
+        //       event.from.toString().should.equal(deployer, "from is correct");
+        //       event.to.should.equal(receiver, "to is correct");
+        //       event.value
+        //       .toString()
+        //       .should.equal(amount.toString(), "amount is correct");
+        //   });
+      });
+    
+
+    // describe("failure", async () => {
+    //   it("rejects insufficient balances", async () => {
+    //         let invalidAmount;
+    //         invalidAmount = tokens(100000000); // 100 million - greater than total supply
+    //         await token
+    //         .transfer(receiver, invalidAmount, { from: deployer })
+    //         .should.be.rejectedWith(EVM_REVERT);
+
+    //         // attempt to transfer tokens when you don't have any
+    //         invalidAmount = tokens(10); // 100 million - greater than total supply
+    //         await token
+    //         .transfer(deployer, invalidAmount, { from: receiver })
+    //         .should.be.rejectedWith(EVM_REVERT);
+    //   });
+
+    //   it("rejects invalid receipients", async () => {
+    //         await token
+    //         .transfer(0x0, amount, { from: deployer })
+    //         .should.be.rejected;
+    //   });
+    // });
+  });
+
 });
