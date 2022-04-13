@@ -146,7 +146,14 @@ contract("Token", ([deployer, receiver, exchange]) => {
             result = await token.transferFrom(deployer, receiver, amount, { from: exchange });
         });
   
-  
+        it("transfers token balances", async () => {
+            let balanceOf;
+            balanceOf = await token.balanceOf(deployer);
+            balanceOf.toString().should.equal(tokens(999900).toString());
+            balanceOf = await token.balanceOf(receiver);
+            balanceOf.toString().should.equal(tokens(100).toString());
+        });
+
         // it("emits a Transfer event", async () => {
         //       const log = result.logs[0];
         //       log.event.should.eq("Transfer");
@@ -156,7 +163,7 @@ contract("Token", ([deployer, receiver, exchange]) => {
         //       event.value
         //       .toString()
         //       .should.equal(amount.toString(), "amount is correct");
-        //   });
+        // });
       });
     
 
