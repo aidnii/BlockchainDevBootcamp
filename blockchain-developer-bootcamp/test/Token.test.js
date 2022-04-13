@@ -154,16 +154,16 @@ contract("Token", ([deployer, receiver, exchange]) => {
             balanceOf.toString().should.equal(tokens(100).toString());
         });
 
-        // it("emits a Transfer event", async () => {
-        //       const log = result.logs[0];
-        //       log.event.should.eq("Transfer");
-        //       const event = log.args;
-        //       event.from.toString().should.equal(deployer, "from is correct");
-        //       event.to.should.equal(receiver, "to is correct");
-        //       event.value
-        //       .toString()
-        //       .should.equal(amount.toString(), "amount is correct");
-        // });
+        it("emits a Transfer event", async () => {
+              const log = result.logs[0];
+              log.event.should.eq("Transfer");
+              const event = log.args;
+              event.from.toString().should.equal(deployer, "from is correct");
+              event.to.should.equal(receiver, "to is correct");
+              event.value
+              .toString()
+              .should.equal(amount.toString(), "amount is correct");
+        });
       });
     
 
