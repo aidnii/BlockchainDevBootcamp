@@ -155,7 +155,8 @@ contract("Token", ([deployer, receiver, exchange]) => {
         });
 
         it("resets the allowance", async () => {
-            
+            const allowance = await token.allowance(deployer, exchange);
+            allowance.toString().should.equal('0'); 
          });
 
         it("emits a Transfer event", async () => {
