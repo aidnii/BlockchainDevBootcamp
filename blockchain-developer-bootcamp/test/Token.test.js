@@ -154,6 +154,10 @@ contract("Token", ([deployer, receiver, exchange]) => {
             balanceOf.toString().should.equal(tokens(100).toString());
         });
 
+        it("resets the allowance", async () => {
+            
+         });
+
         it("emits a Transfer event", async () => {
               const log = result.logs[0];
               log.event.should.eq("Transfer");
