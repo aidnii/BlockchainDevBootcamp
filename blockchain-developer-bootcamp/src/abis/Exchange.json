@@ -1,0 +1,104 @@
+{
+  "contractName": "Exchange",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/indy/blockchain/projects/solidity/BlockchainDevBootcamp/blockchain-developer-bootcamp/src/contracts/Exchange.sol\":\"Exchange\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/indy/blockchain/projects/solidity/BlockchainDevBootcamp/blockchain-developer-bootcamp/src/contracts/Exchange.sol\":{\"keccak256\":\"0x872804a4c2c32da0783ddd8861ae9ab6f717031403de4fe922ec56a670218124\",\"urls\":[\"bzz-raw://85dc88ada967c5a01e2ae20eb4c1e889e8bff6530db85f9c7e79b10c221689f7\",\"dweb:/ipfs/QmNdhN1v2prU67KA5US15fG7bxpEtJyoFhrNCgxkXE25p3\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a72315820e9809ab7882a86f74dd5f8ece5d97ceefd73bac2c1ce06db1cebab3dd0a56a9264736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a72315820e9809ab7882a86f74dd5f8ece5d97ceefd73bac2c1ce06db1cebab3dd0a56a9264736f6c63430005100032",
+  "sourceMap": "385:26:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;385:26:0;;;;;;;",
+  "deployedSourceMap": "385:26:0:-;;;;;",
+  "source": "pragma solidity ^0.5.0;\n// Creating an exchange that can Deposit & withdraw funds\n// Manage orders by making or canceling orders\n// handle trades - charge fees\n \n// To Do:\n// [ ] Set the account fee\n// [ ] Deposit ether\n// [ ] Withdraw ether\n// [ ] Deposit tokens\n// [ ] Withdraw tokens\n// [ ] Check Balances\n// [ ] Make order\n// [ ] Cancel order\n// [ ] Fill order\n// [ ] Charge fees\n\ncontract Exchange {\n    \n}\n\n",
+  "sourcePath": "/Users/indy/blockchain/projects/solidity/BlockchainDevBootcamp/blockchain-developer-bootcamp/src/contracts/Exchange.sol",
+  "ast": {
+    "absolutePath": "/Users/indy/blockchain/projects/solidity/BlockchainDevBootcamp/blockchain-developer-bootcamp/src/contracts/Exchange.sol",
+    "exportedSymbols": {
+      "Exchange": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "Exchange",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "385:26:0"
+      }
+    ],
+    "src": "0:413:0"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/indy/blockchain/projects/solidity/BlockchainDevBootcamp/blockchain-developer-bootcamp/src/contracts/Exchange.sol",
+    "exportedSymbols": {
+      "Exchange": [
+        2
+      ]
+    },
+    "id": 3,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:0"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "Exchange",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "385:26:0"
+      }
+    ],
+    "src": "0:413:0"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.2.3",
+  "updatedAt": "2022-04-14T16:41:10.464Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
