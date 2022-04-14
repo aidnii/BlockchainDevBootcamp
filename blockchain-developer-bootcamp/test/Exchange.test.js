@@ -9,12 +9,13 @@ contract("Exchange", ([deployer, feeAccount]) => {
   let exchange;
 
   beforeEach(async () => {
-    exchange = await Exchange.new();
+    exchange = await Exchange.new(feeAccount);
   });
 
   describe("deployment", () => {
     it("should track the fee account", async () => {
-      
+      const result = await exchange.feeAccount();
+      result.should.equal(feeAccount);
     });
 
     
