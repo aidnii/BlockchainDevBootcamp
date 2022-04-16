@@ -67,7 +67,9 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
     });
 
     describe('failure', () => {
-
+      it("should fail when no tokens are approved", async () => {
+        
+      })
     });
     
   });
