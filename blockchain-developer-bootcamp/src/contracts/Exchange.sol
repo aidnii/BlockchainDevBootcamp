@@ -30,7 +30,7 @@ contract Exchange {
     }
 
     function tokenDeposit(address _token, uint _amount) public {
-        Token(_token).transferFrom(msg.sender, address(this), _amount);
+        require(Token(_token).transferFrom(msg.sender, address(this), _amount));
         // Which token, how much, manage deposits, send tokens to contract
         // Emit event
     }
