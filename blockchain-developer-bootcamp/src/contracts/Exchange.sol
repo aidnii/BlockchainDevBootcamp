@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.5.0;
+
+import "./Token.sol";
+
 // Creating an exchange that can Deposit & withdraw funds
 // Manage orders by making or canceling orders
 // handle trades - charge fees
@@ -25,5 +28,12 @@ contract Exchange {
         feeAccount = _feeAccount;
         feePercent = _feePercent;
     }
+
+    function tokenDeposit(address _token, uint _amount) public {
+        Token(_token).transferFrom(msg.sender, address(this), _amount);
+        // Which token, how much, manage deposits, send tokens to contract
+        // Emit event
+    }
 }
+
 
