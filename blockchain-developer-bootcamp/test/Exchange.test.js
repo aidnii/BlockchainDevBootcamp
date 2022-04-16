@@ -47,7 +47,17 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
       const balance = await exchange.tokens(ETHERS_ADDRESS, user1);
       balance.toString().should.equal(amount.toString());
     });
-    
+
+    it("emits a ether deposit event", async () => {
+      const log = result.logs[0];
+      log.event.should.eq("Deposit");
+      const event = log.args;
+      event.token.should.equal(ETHERS_ADDRESS, "token address is correct");
+      event.user.should.equal(user1, "user address is correct");
+      event.amount.toString().should.equal(amount.toString(), "amount is correct");
+      event.balance.toString().should.equal(amount.toString(), "balance is correct");
+    });
+
   });
 
   describe("depositing tokens", () => {
