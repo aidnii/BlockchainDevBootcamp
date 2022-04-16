@@ -67,10 +67,14 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
     });
 
     describe('failure', () => {
+      it("should reject Ether deposits", async () => {
+        
+      });
+
       it("should fail when no tokens are approved", async () => {
         // Don't approve any tokens before depositing
         await exchange.tokenDeposit(token.address, tokens(10), { from: user1 }).should.be.rejectedWith(EVM_REVERT);
-      })
+      });
     });
     
   });
