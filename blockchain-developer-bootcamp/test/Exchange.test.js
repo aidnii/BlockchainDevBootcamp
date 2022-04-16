@@ -48,7 +48,7 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
       balance.toString().should.equal(amount.toString());
     });
 
-    it("emits a ether deposit event", async () => {
+    it("emits an ether deposit event", async () => {
       const log = result.logs[0];
       log.event.should.eq("Deposit");
       const event = log.args;
