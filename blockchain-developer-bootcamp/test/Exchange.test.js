@@ -1,4 +1,4 @@
-import { tokens, ether, EVM_REVERT, ETHERS_ADDRESS } from "./helpers";
+import { tokens, ether, EVM_REVERT, ETHER_ADDRESS } from "./helpers";
 
 const Token = artifacts.require("./Token");
 const Exchange = artifacts.require("./Exchange");
@@ -50,7 +50,7 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
     })
 
     it("should track the ether deposit", async () => {
-      const balance = await exchange.tokens(ETHERS_ADDRESS, user1);
+      const balance = await exchange.tokens(ETHER_ADDRESS, user1);
       balance.toString().should.equal(amount.toString());
     });
 
@@ -58,12 +58,39 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
       const log = result.logs[0];
       log.event.should.eq("Deposit");
       const event = log.args;
-      event.token.should.equal(ETHERS_ADDRESS, "token address is correct");
+      event.token.should.equal(ETHER_ADDRESS, "token address is correct");
       event.user.should.equal(user1, "user address is correct");
       event.amount.toString().should.equal(amount.toString(), "amount is correct");
       event.balance.toString().should.equal(amount.toString(), "balance is correct");
     });
 
+  });
+
+  describe("withdrawing Ether", async () => {
+    let result;
+    let amount;
+
+    beforeEach(async () => {
+      // Deposit Ether first
+      amount = ether(1);
+      await exchange.depositEther({ from: user1, value: amount });
+    });
+
+    describe("success", async () => {
+      beforeEach(async () => {
+        // Withdraw Ether
+        result = await exchange.withdrawEther(amount, { from: user1 });
+      });
+
+      it("should withdraw Ether funds", async () => {
+        const balance = await exchange.tokens(ETHER_ADDRESS, user1);
+        balance.toString().should.equal('0');
+      });
+    });
+
+    describe("failure", async () => {
+
+    });
   });
 
   describe("depositing tokens", () => {
@@ -100,7 +127,7 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
 
     describe('failure', () => {
       it("should reject Ether deposits", async () => {
-        await exchange.depositToken(ETHERS_ADDRESS, tokens(10), { from: user1 }).should.be.rejectedWith(EVM_REVERT);
+        await exchange.depositToken(ETHER_ADDRESS, tokens(10), { from: user1 }).should.be.rejectedWith(EVM_REVERT);
       });
 
       it("should fail when no tokens are approved", async () => {
