@@ -215,6 +215,14 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
     it("should track the newly created order", async () => {
       const orderCount = await exchange.orderCount();
       orderCount.toString().should.equal('1');
+      const order = await exchange.orders('1');
+      order.id.toString().should.equal('1', 'id is correct');
+      order.user.should.equal(user1, 'user is correct');
+      order.getToken.should.equal(token.address, 'getToken is correct');
+      order.getAmount.toString().should.equal(tokens(1).toString(), 'getAmount is correct');
+      order.sendToken.should.equal(ETHER_ADDRESS, 'sendToken is correct');
+      order.sendAmount.toString().should.equal(ether(1).toString(), 'sendAmount is correct');
+      order.timestamp.toString().length.should.be.at.least(1, 'timestamp is correct');
     });
   });
 
