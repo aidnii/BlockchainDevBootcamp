@@ -183,7 +183,9 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
     });
 
     describe("failure", async () => {
-      
+      it("should reject Ether withdraws", async () => {
+        await exchange.withdrawToken(ETHER_ADDRESS, tokens(10), { from: user1 }).should.be.rejectedWith(EVM_REVERT);
+      });
     });
   });
 
