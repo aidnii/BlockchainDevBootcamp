@@ -260,6 +260,19 @@ contract("Exchange", ([deployer, feeAccount, user1]) => {
           const orderCancelled = await exchange.orderCancelled(1);
           orderCancelled.should.equal(true);
         });
+
+        it("emits a cancel event", async () => {
+          const log = result.logs[0];
+          log.event.should.eq("Cancel");
+          const event = log.args;
+          event.id.toString().should.equal('1', 'id is correct');
+          event.user.should.equal(user1, 'user is correct');
+          event.getToken.should.equal(token.address, 'getToken is correct');
+          event.getAmount.toString().should.equal(tokens(1).toString(), 'getAmount is correct');
+          event.sendToken.should.equal(ETHER_ADDRESS, 'sendToken is correct');
+          event.sendAmount.toString().should.equal(ether(1).toString(), 'sendAmount is correct');
+          event.timestamp.toString().length.should.be.at.least(1, 'timestamp is correct');
+        });
       });
 
       describe("failure", async () => {
