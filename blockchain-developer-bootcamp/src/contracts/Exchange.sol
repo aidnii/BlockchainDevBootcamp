@@ -15,7 +15,7 @@ import "./Token.sol";
 // [x] Deposit tokens
 // [x] Withdraw tokens
 // [x] Check Balances
-// [ ] Make order
+// [x] Make order
 // [ ] Cancel order
 // [ ] Fill order
 // [ ] Charge fees
@@ -30,11 +30,13 @@ contract Exchange {
     mapping(address => mapping(address => uint256)) public tokens;
     mapping(uint256 => _Order) public orders; // Store the order on the blockchain
     uint256 public orderCount; // keep track of orders as counter cache
+    mapping(uint256 => bool) public orderCancelled;
 
     // Events
     event Deposit(address token, address user, uint256 amount, uint256 balance);
     event Withdraw(address token, address user, uint256 amount, uint256 balance);
     event Order(uint256 id, address user, address getToken, uint256 getAmount, address sendToken, uint256 sendAmount, uint256 timestamp);
+    event Cancel(uint256 id, address user, address getToken, uint256 getAmount, address sendToken, uint256 sendAmount, uint256 timestamp);
 
     // Structs - Model the order
     struct _Order {
@@ -94,6 +96,14 @@ contract Exchange {
         orderCount = orderCount.add(1);
         orders[orderCount] = _Order(orderCount, msg.sender, _getToken, _getAmount, _sendToken, _sendAmount, now);
         emit Order(orderCount, msg.sender, _getToken, _getAmount, _sendToken, _sendAmount, now);
+    }
+
+    function cancelOrder(uint256 _id) public {
+        _Order storage _order = orders[_id];
+        require(address(_order.user) == msg.sender);
+        require(_order.id == _id); // The order must exist
+        orderCancelled[_id] = true;
+        emit Cancel(_order.id, msg.sender, _order.getToken, _order.getAmount, _order.sendToken, _order.sendAmount, now);
     }
 }
 
